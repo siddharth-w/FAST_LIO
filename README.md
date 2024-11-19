@@ -140,8 +140,13 @@ Edit ``` config/avia.yaml ``` to set the below parameters:
 - FAST-LIO produces a very simple software time sync for livox LiDAR, set parameter ```time_sync_en``` to ture to turn on. But turn on **ONLY IF external time synchronization is really not possible**, since the software time sync cannot make sure accuracy.
 
 ### 3.4 PCD file save
+To save your map file using ros service, run:
 
-Set ``` pcd_save_enable ``` in launchfile to ``` 1 ```. All the scans (in global frame) will be accumulated and saved to the file ``` FAST_LIO/PCD/scans.pcd ``` after the FAST-LIO is terminated. ```pcl_viewer scans.pcd``` can visualize the point clouds.
+```bash
+    ros2 service call /map_save std_srvs/srv/Trigger 
+```
+
+Or to save map based on internal timer and fater SIGINT, set ``` pcd_save_enable ``` in launchfile to ``` 1 ```. All the scans (in global frame) will be accumulated and saved to the file ``` FAST_LIO/PCD/scans.pcd ``` after the FAST-LIO is terminated. ```pcl_viewer scans.pcd``` can visualize the point clouds.
 
 *Tips for pcl_viewer:*
 - change what to visualize/color by pressing keyboard 1,2,3,4,5 when pcl_viewer is running. 
@@ -152,6 +157,7 @@ Set ``` pcd_save_enable ``` in launchfile to ``` 1 ```. All the scans (in global
     4 is Z values
     5 is intensity
 ```
+
 
 ## 4. Rosbag Example
 ### 4.1 Livox Avia Rosbag
